@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethan — Developer &amp; Security Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAFAF8;
+    --bg-alt: #F2F1EB;
+    --ink: #14181F;
+    --ink-soft: #454C57;
+    --muted: #6B7280;
+    --accent: #2D6A4F;
+    --accent-soft: #E4EEE9;
+    --amber: #B45309;
+    --line: #E5E3DD;
+    --radius: 3px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  header.site{
+    position: sticky;
+    top: 0;
+    background: rgba(250,250,248,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+  header.site .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:16px;
+    padding-bottom:16px;
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    letter-spacing:0.02em;
+  }
+  .logo strong{ color: var(--accent); }
+  nav.primary{ display:flex; gap: 24px; }
+  nav.primary a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration:none;
+    color: var(--ink-soft);
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  nav.primary a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  /* HERO */
+  .hero{
+    padding: 96px 0 72px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--accent);
+    display:inline-block;
+  }
+  h1.name{
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.05;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .role{
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 0 32px;
+  }
+  .role em{
+    font-style: normal;
+    color: var(--ink);
+    border-bottom: 2px solid var(--accent-soft);
+  }
+
+  .terminal{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 14px;
+    background: var(--ink);
+    color: #D7E4DC;
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    max-width: 460px;
+    overflow:hidden;
+  }
+  .terminal .prompt{ color: #7FBFA1; margin-right: 8px; }
+  .terminal .typed::after{
+    content: '';
+    display:inline-block;
+    width: 7px; height: 15px;
+    background: #7FBFA1;
+    margin-left: 2px;
+    vertical-align: -2px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .cta-row{ display:flex; gap:14px; margin-top: 36px; flex-wrap: wrap; }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    text-decoration:none;
+    display:inline-block;
+    border: 1px solid var(--ink);
+  }
+  .btn.solid{ background: var(--ink); color: var(--bg); }
+  .btn.solid:hover{ background: var(--accent); border-color: var(--accent); }
+  .btn.ghost{ color: var(--ink); }
+  .btn.ghost:hover{ border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section{ padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom: none; }
+
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .section-head .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight: 500;
+    font-size: 28px;
+    margin: 0;
+  }
+
+  .about p{ color: var(--ink-soft); max-width: 620px; }
+  .about p + p{ margin-top: 14px; }
+
+  .project{
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    display:grid;
+    grid-template-columns: 90px 1fr;
+    gap: 20px;
+  }
+  .project:first-of-type{ border-top: none; }
+  .project .idx{
+    font-family:'IBM Plex Mono', monospace;
+    color: var(--muted);
+    font-size: 13px;
+    padding-top: 3px;
+  }
+  .project h3{
+    margin: 0 0 8px;
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: 21px;
+  }
+  .project p{ margin: 0 0 12px; color: var(--ink-soft); max-width: 520px; }
+  .project-tags{ display:flex; flex-wrap:wrap; gap: 8px; }
+  .project-tags span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .project a.link{
+    display:inline-block;
+    margin-top: 12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .project a.link:hover{ color: var(--accent); border-color: var(--accent); }
+
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .skill-group h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--amber);
+    margin: 0 0 12px;
+  }
+  .skill-group ul{
+    list-style:none; margin:0; padding:0;
+    display:flex; flex-wrap:wrap; gap: 8px;
+  }
+  .skill-group li{
+    font-size: 14px;
+    color: var(--ink-soft);
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    padding: 5px 12px;
+    border-radius: var(--radius);
+  }
+
+  .contact p{ color: var(--ink-soft); max-width: 480px; margin: 0 0 28px; }
+  .contact-links{ display:flex; flex-direction:column; gap: 10px; }
+  .contact-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 15px;
+    text-decoration:none;
+    color: var(--ink);
+    width: fit-content;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .contact-links a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  footer{
+    padding: 28px 0 48px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    display:flex; justify-content:space-between;
+  }
+
+  @media (max-width: 620px){
+    nav.primary{ display:none; }
+    .project{ grid-template-columns: 1fr; }
+    .skills-grid{ grid-template-columns: 1fr; }
+    .hero{ padding: 64px 0 48px; }
+    footer{ flex-direction:column; gap: 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .terminal .typed::after{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="logo">rudra<strong>.</strong>dev</div>
+    <nav class="primary">
+      <a href="#about">about</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> AVAILABLE FOR OPPORTUNITIES</div>
+    <h1 class="name">Rudra Kumar Mavi</h1>
+    <p class="role">I build software and break it on purpose — <em>developer</em> by trade, <em>security researcher</em> by curiosity. I like finding the gap between what a spec promises and what the code actually does.</p>
+
+    <div class="terminal">
+      <span class="prompt">$</span><span class="typed" id="typedLine">whoami</span>
+    </div>
+
+    <div class="cta-row">
+      <a href="#projects" class="btn solid">View projects</a>
+      <a href="#contact" class="btn ghost">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">01</span>
+      <h2>About</h2>
+    </div>
+    <p>I'm a Computer Science Engineering student specializing in AI/ML, with a strong pull toward cybersecurity, DevSecOps, and OSINT tooling. I like building things end-to-end — from models and automation to the infrastructure that runs them.</p>
+    <p>On the security side, I focus on source-code review and finding gaps between what a spec promises and what the implementation actually does, rather than pure black-box recon. It's the same instinct that drives the OSINT and DevSecOps side — understanding a system well enough to know exactly where it can fail.</p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">02</span>
+      <h2>Projects</h2>
+    </div>
+
+    <div class="project">
+      <div class="idx">01</div>
+      <div>
+        <h3>Chrome Dino Game Clone</h3>
+        <p>A recreation of Chrome's offline dinosaur runner, built as a React component from scratch — covering game loop mechanics, collision detection, and progressive difficulty.</p>
+        <div class="project-tags"><span>React</span><span>JavaScript</span><span>Game Dev</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx">02</div>
+      <div>
+        <h3>Web OS Simulator</h3>
+        <p>A browser-based desktop environment with draggable windows, a taskbar, and simulated apps — an exercise in state management and UI architecture built entirely in React.</p>
+        <div class="project-tags"><span>React</span><span>JavaScript</span><span>UI Architecture</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx">03</div>
+      <div>
+        <h3>Discord &amp; Telegram Bots</h3>
+        <p>A set of utility and moderation bots — automated moderation, chat commands, and server utilities for Discord, plus moderation and chat automation for Telegram.</p>
+        <div class="project-tags"><span>Node.js</span><span>Python</span><span>Automation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">03</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <ul>
+          <li>Python</li>
+          <li>JavaScript</li>
+          <li>C</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Tools &amp; Frameworks</h4>
+        <ul>
+          <li>React</li>
+          <li>Node.js</li>
+          <li>Git</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Security</h4>
+        <ul>
+          <li>Source code review</li>
+          <li>Vulnerability analysis</li>
+          <li>Bug bounty</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>AI / ML</h4>
+        <ul>
+          <li>NumPy</li>
+          <li>Pandas</li>
+          <li>scikit-learn</li>
+          <li>PyTorch</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>OSINT</h4>
+        <ul>
+          <li>Maltego</li>
+          <li>theHarvester</li>
+          <li>Shodan</li>
+          <li>Recon-ng</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>DevSecOps</h4>
+        <ul>
+          <li>Docker</li>
+          <li>CI/CD pipelines</li>
+          <li>Static analysis</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">04</span>
+      <h2>Contact</h2>
+    </div>
+    <p>Open to internships, collaboration, or a conversation about interesting bugs. Reach out through any of the below.</p>
+    <div class="contact-links">
+      <a href="mailto:mavi.rudraa@gmail.com">mavi.rudraa@gmail.com</a>
+      <a href="https://github.com/mavirudra" target="_blank" rel="noopener">github.com/mavirudra</a>
+      <a href="https://linkedin.com/in/dakait" target="_blank" rel="noopener">linkedin.com/in/dakait</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Rudra Kumar Mavi</span>
+    <span>built by hand</span>
+  </div>
+</footer>
+
+<script>
+  const target = "whoami";
+  const el = document.getElementById('typedLine');
+  el.textContent = '';
+  let i = 0;
+  function type(){
+    if(i <= target.length){
+      el.textContent = target.slice(0, i);
+      i++;
+      setTimeout(type, 110);
+    }
+  }
+  window.addEventListener('load', () => setTimeout(type, 400));
+</script>
+
+</body>
+</html>
